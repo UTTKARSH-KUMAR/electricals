@@ -558,18 +558,7 @@
                 <div class="col">
                   <input type="text" name="number" class="form-control" placeholder="Contact Number" />
                 </div>
-                <div class="col">
-                  <input type="text" name="dateMoving" class="form-control" placeholder="Date Of Moving" />
-                </div>
-              </div>
 
-              <div class="row g-4 mb-4">
-                <div class="col">
-                  <input type="text" name="movingFrom" class="form-control" placeholder="Moving From" />
-                </div>
-                <div class="col">
-                  <input type="text" name="movingTo" class="form-control" placeholder="Moving To" />
-                </div>
               </div>
 
               <div class="row g-4 mb-4">
@@ -582,16 +571,18 @@
               <div class="row g-4 mb-4">
                 <div class="col">
                   <select name="swiftingType" class="row mx-0" id="cars">
-                    <option value="homeShifting">Home Shifting</option>
-                    <option value="homeVehicle">Home+Vehicle</option>
-                    <option value="officeShifting">Office Shifting</option>
+                    <option value="homeShifting">Site visit</option>
+                    <option value="homeVehicle">Solar</option>
+                    <option value="officeShifting">Home Appliances</option>
                     <option value="carTransportation">
-                      Car Transportation
+                      Switches and Panels
                     </option>
                     <option value="bikeTransportation">
-                      Bike Transportation
+                      Lighting Solutions
                     </option>
-                    <option value="warehousing">Warehousing Services</option>
+                    <option value="warehousing">
+                      Repair Services
+                    </option>
                     <option value="petTransport">Pet Transport</option>
                   </select>
                 </div>
@@ -642,7 +633,8 @@
               <div class="row">
                 <div class="col-md-12">
                   <h4>
-                    <i class="icofont-map"></i> address
+                    <i class="icofont-map"></i>Santosh Electricals<br></br>
+                    Shop no-3, Irshad Kha, opp. Indian Oil petrol pump, Dhandera.
                   </h4>
                   <a href=""><i class="icofont-phone"></i> <span>+91 8077767416</span></a>
                   <div class="text-nowrap padding-top">
@@ -921,8 +913,11 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
+      // Initialize EmailJS with your Public Key
+      emailjs.init("JWqwz2DXp5w6hW4ih");
+
       document.querySelector('form').addEventListener('submit', function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent form from refreshing
 
         // Prepare the form data
         const formData = {
@@ -935,12 +930,16 @@
           message: event.target.querySelector('textarea').value,
           service: event.target.swiftingType.value
         };
+
         // Send the email using EmailJS
-        emailjs.send("enterservice", "entertemplateid", formData)
+        emailjs.send("service_9j3knad", "template_523dn9q", formData)
           .then(function (response) {
             alert('Message sent successfully!');
-          }, function (error) {
+            event.target.reset(); // Clear the form after successful submission
+          })
+          .catch(function (error) {
             alert('Failed to send message. Please try again later.');
+            console.error("EmailJS Error:", error);
           });
       });
     });
@@ -951,6 +950,7 @@
     integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
     data-cf-beacon='{"rayId":"86dfa9266f5df0f0","version":"2024.3.0","r":1,"token":"64224fc8786846928480d180dfc466bd","b":1}'
     crossorigin="anonymous"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
 </body>
 
